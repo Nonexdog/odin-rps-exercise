@@ -66,9 +66,11 @@ function pickWinner(playerSelection, computerSelection) {
 
 function game() {
   // Initialize variables for score tracking and loop
-  let playerScore, computerScore;
+  let playerScore = 0;
+  let computerScore = 0;
   let winner;
   // Since it's best of 5, whoever gets to three first wins
+  // This is a single round. Player and computer values are obtained, compared, and the winner is returned.
   while (!winner) {
     const computerChoice = getComputerChoice();
     console.log('Computer choice: ' + computerChoice);
@@ -77,8 +79,14 @@ function game() {
     // If there is no valid input, repeat the process
     if (!winner) {
       console.log('That\'s not a valid option!');
+    } else if (winner === 'player') {
+      playerScore++;
+    } else if (winner === 'computer') {
+      computerScore++;
     }
   }
+  console.log(playerScore);
+  console.log(computerScore);
   return winner;
 }
 
