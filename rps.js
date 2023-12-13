@@ -80,7 +80,7 @@ function game() {
     while (!roundWinner) {
       // Get choices from computer and player
       computerChoice = getComputerChoice();
-      console.log('Computer choice: ' + computerChoice);
+      // console.log('Computer choice: ' + computerChoice);
       playerChoice = prompt('Choose: rock, paper or scissors?');
       // Select the winner 
       roundWinner = pickWinner(playerChoice, computerChoice);
