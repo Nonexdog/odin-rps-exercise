@@ -68,26 +68,52 @@ function game() {
   // Initialize variables for score tracking and loop
   let playerScore = 0;
   let computerScore = 0;
-  let winner;
+  // Initialize variables for choices
+  let computerChoice;
+  let playerChoice;
+  // Initialize winner variables
+  let roundWinner;
+  let finalWinner; 
   // Since it's best of 5, whoever gets to three first wins
-  // This is a single round. Player and computer values are obtained, compared, and the winner is returned.
-  while (!winner) {
-    const computerChoice = getComputerChoice();
-    console.log('Computer choice: ' + computerChoice);
-    const playerChoice = prompt('Choose: rock, paper or scissors?');
-    winner = pickWinner(playerChoice, computerChoice);
-    // If there is no valid input, repeat the process
-    if (!winner) {
-      console.log('That\'s not a valid option!');
-    } else if (winner === 'player') {
-      playerScore++;
-    } else if (winner === 'computer') {
-      computerScore++;
+  while (playerScore < 3 && computerScore < 3) {
+    // This is a single round. Player and computer values are obtained, compared, and the winner is returned.
+    while (!roundWinner) {
+      // Get choices from computer and player
+      computerChoice = getComputerChoice();
+      console.log('Computer choice: ' + computerChoice);
+      playerChoice = prompt('Choose: rock, paper or scissors?');
+      // Select the winner 
+      roundWinner = pickWinner(playerChoice, computerChoice);
+      // If there is no valid input, repeat the process
+      if (!roundWinner) {
+        console.log('That\'s not a valid option!');
+      } else if (roundWinner === 'player') {
+        playerScore++;
+
+      } else if (roundWinner === 'computer') {
+        computerScore++;
+      }
     }
+    // Log winners of each round and scores
+    if (roundWinner === 'player') {
+      console.log(`${playerChoice} beats ${computerChoice}. The player is the winner of the round!!`);
+    } else if (roundWinner === 'computer') {
+      console.log(`${computerChoice} beats ${playerChoice}. The computer is the winner of the round!!`);
+    } else {
+      console.log('Aw shucks!! It seems like it\'s a tie!!');
+    }
+    console.log(`Current scores are: Player - ${playerScore}, Computer - ${computerScore}`)
+    // Reset roundWinner to null
+    roundWinner = null;
   }
-  console.log(playerScore);
-  console.log(computerScore);
-  return winner;
+  // Decide who the winner is
+  if (playerScore === 3) {
+    finalWinner = 'Player';
+  } else {
+    finalWinner = 'Computer';
+  }
+
+  return finalWinner;
 }
 
-console.log(game());
+console.log('And the winner is: ' + game() + '!!')
