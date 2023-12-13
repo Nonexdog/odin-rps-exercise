@@ -8,7 +8,7 @@ function getComputerChoice() {
   const randomSelection = Math.floor(Math.random()*3);
   return RPS.at(randomSelection);
 }
-console.log('Computer choice: ' + getComputerChoice());
+
 
 // Create a function that takes two parameters, playerSelection and computerSelection, and then returns the winner or a tie.
   // Function should be case insensitive to avoid unexpected errors. 
@@ -22,49 +22,64 @@ function pickWinner(playerSelection, computerSelection) {
   switch (playerSelection) {
     case 'rock':
       if (computerSelection === 'scissors') {
-        winner = 'Player';
+        winner = 'player';
         break;
       } else if (computerSelection === 'paper') {
-        winner = 'Computer';
+        winner = 'computer';
         break;
       } else {
+        winner = 'tie'
         break;
       }
     case 'paper':
       if (computerSelection === 'rock') {
-        winner = 'Player';
+        winner = 'player';
         break;
       } else if (computerSelection === 'scissors') {
-        winner = 'Computer';
+        winner = 'computer';
         break;
       } else {
+        winner = 'tie';
         break;
       }
     case 'scissors':
       if (computerSelection === 'paper') {
-        winner = 'Player';
+        winner = 'player';
         break;
       } else if (computerSelection === 'rock') {
-        winner = 'Computer';
+        winner = 'computer';
         break;
       } else {
+        winner = 'tie';
         break;
       }
-    default:
-      return 'Hey!! That is not a valid selection!!';
   }
 
-  if (winner === 'Player') {
-    return `${winner} is the winner!! ${playerSelection} beats ${computerSelection}`;
-  } else if (winner === 'Computer') {
-    return `${winner} is the winner!! ${computerSelection} beats ${playerSelection}`;
-  } else {
-    return 'It\'s a tie!!';
-  }
+  return winner;
 }
 
-console.log(pickWinner('ROCK','paper'));
-console.log(pickWinner('scISsors','paper'));
-console.log(pickWinner('paper','paper'));
+// console.log(pickWinner('ROCK','paper'));
+// console.log(pickWinner('scISsors','paper'));
+// console.log(pickWinner('paper','paper'));
 
 // Write a function called game() to play a best-of-five game. 
+
+function game() {
+  // Initialize variables for score tracking and loop
+  let playerScore, computerScore;
+  let winner;
+  // Since it's best of 5, whoever gets to three first wins
+  while (!winner) {
+    const computerChoice = getComputerChoice();
+    console.log('Computer choice: ' + computerChoice);
+    const playerChoice = prompt('Choose: rock, paper or scissors?');
+    winner = pickWinner(playerChoice, computerChoice);
+    // If there is no valid input, repeat the process
+    if (!winner) {
+      console.log('That\'s not a valid option!');
+    }
+  }
+  return winner;
+}
+
+console.log(game());
