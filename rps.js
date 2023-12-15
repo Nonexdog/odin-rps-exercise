@@ -4,14 +4,13 @@ const cpuChoiceText = document.querySelector('.results p');
 const winnerParagraph = document.querySelector('.results p:nth-child(2)');
 
 buttons.forEach((button) => 
-  addEventListener('click', (e) => {
-    e.stopImmediatePropagation();
-    let playerChoice = button.textContent;
+  button.addEventListener('click', (e) => {
+    playerChoice = button.textContent;
     console.log(playerChoice);
     console.log(buttons);
     let cpuChoice = getComputerChoice();
-    let winner = pickWinner(playerChoice,cpuChoice);
-    writeWinner(winner,playerChoice,cpuChoice);
+    let winner = pickWinner(playerChoice, cpuChoice);
+    writeWinner(winner, playerChoice, cpuChoice);
 }));
 
 function getComputerChoice() {
