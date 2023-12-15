@@ -1,11 +1,17 @@
 const buttons = document.querySelectorAll('button');
+const winnerDiv = document.querySelector('.results');
+const cpuChoiceText = document.querySelector('.results p');
+const winnerParagraph = document.querySelector('.results p:nth-child(2)');
 
 buttons.forEach((button) => 
   addEventListener('click', (e) => {
     e.stopImmediatePropagation();
-    let winner = pickWinner(button.textContent,getComputerChoice());
-    console.log(button.textContent);
-    console.log(winner);
+    let playerChoice = button.textContent;
+    console.log(playerChoice);
+    console.log(buttons);
+    let cpuChoice = getComputerChoice();
+    let winner = pickWinner(playerChoice,cpuChoice);
+    writeWinner(winner,playerChoice,cpuChoice);
 }));
 
 function getComputerChoice() {
@@ -58,32 +64,13 @@ function pickWinner(playerSelection, computerSelection) {
 }
 
 
-function writeWinner(roundWinner) {
-
-  
+function writeWinner(roundWinner,playerChoice,computerChoice) {
+  cpuChoiceText.textContent = 'Computer chose: ' + computerChoice;
   if (roundWinner === 'player') {
-    playerScore++;
-
+    winnerParagraph.textContent = `${playerChoice} beats ${computerChoice}. You're the winner of the round!!`;
   } else if (roundWinner === 'computer') {
-    computerScore++;
-  }
-  // Log winners of each round and scores
-  if (roundWinner === 'player') {
-    console.log(`${playerChoice} beats ${computerChoice}. The player is the winner of the round!!`);
-  } else if (roundWinner === 'computer') {
-    console.log(`${computerChoice} beats ${playerChoice}. The computer is the winner of the round!!`);
+    winnerParagraph.textContent = `${computerChoice} beats ${playerChoice}. The computer is the winner of the round!!`;
   } else {
-    console.log('Aw shucks!! It seems like it\'s a tie!!');
+    winnerParagraph.textContent = 'Aw shucks!! It seems like it\'s a tie!!';
   }
-  console.log(`Current scores are: Player - ${playerScore}, Computer - ${computerScore}`)
-  // Reset roundWinner to null
-  roundWinner = null;
-  // Decide who the winner is
-  if (playerScore === 3) {
-    finalWinner = 'Player';
-  } else {
-    finalWinner = 'Computer';
-  }
-
-  return finalWinner;
 }
