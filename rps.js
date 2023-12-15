@@ -76,7 +76,7 @@ function writeWinner(roundWinner,playerChoice,computerChoice) {
   if (roundWinner === 'player') {
     winnerParagraph.textContent = `${playerChoice} beats ${computerChoice}. You're the winner of the round!!`;
   } else if (roundWinner === 'computer') {
-    winnerParagraph.textContent = `${computerChoice} beats ${playerChoice}. The computer is the winner of the round!!`;
+    winnerParagraph.textContent = `${computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1)} beats ${playerChoice.toLowerCase()}. The computer is the winner of the round!!`;
   } else {
     winnerParagraph.textContent = 'Aw shucks!! It seems like it\'s a tie!!';
   }
