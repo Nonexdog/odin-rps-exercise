@@ -6,4 +6,12 @@ button {
   border-radius: 1rem;
   margin-right: 1rem;
   background-color: coral;
+  transition: background-color .1s;
+}
+button:hover {
+  cursor: pointer;
+  background-color: lightgreen;
+}
+button:active {
+  background-color: violet;
 }
