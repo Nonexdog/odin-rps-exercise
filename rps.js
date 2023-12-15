@@ -18,6 +18,7 @@ buttons.forEach((button) =>
     writeWinner(winner, playerChoice, cpuChoice);
     addScore(winner);
     displayScore();
+    finishGame();
 }));
 
 function getComputerChoice() {
@@ -92,5 +93,13 @@ function addScore(winner) {
 function displayScore() {
   if (playerScore || computerScore) {
     scoreParagraph.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
+  }
+}
+
+function finishGame() {
+  if (playerScore >= 3) {
+    finalWinnerParagraph.textContent = 'You win!! Congrats!!'
+  } else if (computerScore >= 3) {
+    finalWinnerParagraph.textContent = 'The computer won, better luck next time!!';
   }
 }
