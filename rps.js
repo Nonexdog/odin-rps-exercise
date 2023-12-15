@@ -1,4 +1,4 @@
-const buttons = document.querySelectorAll('button');
+const buttons = document.querySelectorAll('.choice');
 const winnerDiv = document.querySelector('.results');
 const cpuChoiceText = document.querySelector('.results p');
 const winnerParagraph = document.querySelector('.results p:nth-child(2)');
@@ -9,7 +9,7 @@ let playerScore = 0;
 let computerScore = 0;
 
 buttons.forEach((button) => 
-  button.addEventListener('click', (e) => {
+  button.addEventListener('click', () => {
     playerChoice = button.textContent;
     console.log(playerChoice);
     console.log(buttons);
@@ -97,9 +97,28 @@ function displayScore() {
 }
 
 function finishGame() {
+  let gameOver = false;
   if (playerScore >= 3) {
     finalWinnerParagraph.textContent = 'You win!! Congrats!!'
+    gameOver = true;
   } else if (computerScore >= 3) {
     finalWinnerParagraph.textContent = 'The computer won, better luck next time!!';
+    gameOver = true;
+  }
+  if (gameOver) {
+    const buttonRestart = document.createElement('button');
+    buttonRestart.textContent = 'Play Again?';
+    buttons.forEach((button) => button.disabled = true);
+    playerScore = 0;
+    computerScore = 0;
+    buttonRestart.addEventListener('click', () => {
+      cpuChoiceText.textContent = '';
+      winnerParagraph.textContent = 'Waiting for player to pick...';
+      scoreParagraph.textContent = '';
+      finalWinnerParagraph.textContent = '';
+      buttonRestart.remove();
+      buttons.forEach((button) => button.disabled = false);
+    });
+    winnerDiv.appendChild(buttonRestart);
   }
 }
