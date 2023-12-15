@@ -1,3 +1,12 @@
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) => 
+  addEventListener('click', (e) => {
+    e.stopImmediatePropagation();
+    let winner = pickWinner(button.textContent,getComputerChoice());
+    console.log(button.textContent);
+    console.log(winner);
+}));
 
 function getComputerChoice() {
   const RPS = ['rock','paper','scissors'];
@@ -45,40 +54,18 @@ function pickWinner(playerSelection, computerSelection) {
         break;
       }
   }
-
   return winner;
 }
 
 
-function game() {
+function writeWinner(roundWinner) {
 
-  let playerScore = 0;
-  let computerScore = 0;
+  
+  if (roundWinner === 'player') {
+    playerScore++;
 
-  let computerChoice;
-  let playerChoice;
-
-  let roundWinner;
-  let finalWinner; 
-  // Since it's best of 5, whoever gets to three first wins
-
-    
-  while (!roundWinner) {
-   
-    computerChoice = getComputerChoice();
-    
-    playerChoice = prompt('Choose: rock, paper or scissors?');
-    
-    roundWinner = pickWinner(playerChoice, computerChoice);
-    
-    if (!roundWinner) {
-      console.log('That\'s not a valid option!');
-    } else if (roundWinner === 'player') {
-      playerScore++;
-
-    } else if (roundWinner === 'computer') {
-      computerScore++;
-    }
+  } else if (roundWinner === 'computer') {
+    computerScore++;
   }
   // Log winners of each round and scores
   if (roundWinner === 'player') {
@@ -100,5 +87,3 @@ function game() {
 
   return finalWinner;
 }
-
-console.log('And the winner is: ' + game() + '!!')
